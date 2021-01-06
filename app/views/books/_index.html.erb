@@ -1,0 +1,34 @@
+ <div class="row">
+ <% if @book.errors.any? %>
+     <div id="error_explanation">
+       <h3><%= @book.errors.count %>error prohibited this obj from being saved:</h3>
+       <ul>
+        <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+         <% end %>
+       </ul>
+      </div>
+   <% end %>
+   <div class="col-xs-3">
+<table class='table table-hover table-inverse'>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% books.each do |book| %>
+      <tr>
+        <td><%= link_to user_path(book.user) do %>
+          <%= attachment_image_tag(book.user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %>
+          <% end %>
+        </td>
+        <td><%= link_to book.title, book_path(book), class: "book_#{book.id}" %></td>
+        <td><%= book.body %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
